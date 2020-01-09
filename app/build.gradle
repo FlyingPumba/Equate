@@ -10,13 +10,13 @@ allprojects {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.3"
+    compileSdkVersion 27
+    buildToolsVersion "28.0.3"
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
         applicationId "com.llamacorp.equate"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
 
         testApplicationId "com.llamacorp.equate.test"
 //        // for old Android testing:
@@ -43,9 +43,9 @@ android {
 
 
 dependencies {
-    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:design:27.1.1'
     compile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support:design:26.1.0'
+    androidTestCompile 'com.android.support:design:27.1.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
@@ -55,5 +55,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
         exclude group: 'com.android.support', module: 'design'
     }
+    androidTestCompile 'com.android.support.test:runner:1.0.2'
+    androidTestCompile 'com.android.support.test:rules:1.0.2'
     compile 'com.android.support.test.espresso:espresso-idling-resource:3.0.2'
 }
