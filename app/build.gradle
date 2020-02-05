@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+/* ADDED for instrumentation begin */
+apply plugin: 'jacoco'
+
+
+jacoco {
+    toolVersion = "0.8.2"
+}
+
+/* ADDED for instrumentation end */
+
 allprojects {
     repositories {
         jcenter()
@@ -26,6 +36,11 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            /* ADDED test coverage enabled for instrumentation begin */
+            testCoverageEnabled = true
+            /* ADDED test coverage enabled for instrumentation end */
+        }
         release {
             shrinkResources true
             minifyEnabled true
