@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import com.llamacorp.equate.R;
 import com.llamacorp.equate.unit.Unit;
@@ -47,8 +48,17 @@ public class UnitUpdater {
 			ut.setUpdating(true);
 			// perform the unit update using a separate thread so UI thread
 			// doesn't get bogged down
-			new UpdateCurrenciesAsyncTask(ut, forced, mUnitsToUpdate, mContext)
-					  .execute();
+			UpdateCurrenciesAsyncTask task = new UpdateCurrenciesAsyncTask(ut, forced, mUnitsToUpdate, mContext);
+
+			// @IVAN: changed the following line for the ones below,
+			// for more info read: https://stackoverflow.com/questions/26890618/asynctask-doinbackground-not-called-after-calling-method-onpreexecute
+			// task.execute();
+
+			if(Build.VERSION.SDK_INT >= 11/*HONEYCOMB*/) {
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			} else {
+				task.execute();
+			}
 
 		} else {
 			ViewUtils.toast(mContext.getText(R.string.words_units_up_to_date)
